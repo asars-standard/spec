@@ -1,0 +1,177 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/asars-standard/spec/schema.json",
+  "title": "ASARS v0.1",
+  "description": "Autonomous Systems Audit Receipt Standard version 0.1.0",
+  "version": "0.1.0",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "schema_version",
+    "timestamp_utc",
+    "sequence_id",
+    "observation_layer",
+    "agent_identity",
+    "event",
+    "chain",
+    "attestation",
+    "payload_hash"
+  ],
+  "properties": {
+    "receipt_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this receipt. UUID v4."
+    },
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.1.0"],
+      "description": "ASARS schema version this receipt conforms to."
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Receipt generation timestamp in UTC. ISO 8601 format."
+    },
+    "sequence_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing position in the receipt chain."
+    },
+    "observation_layer": {
+      "type": "string",
+      "description": "Architectural layer at which the event was captured.",
+      "examples": ["kernel_syscall", "kernel_lsm", "userspace_proxy", "network_tap"]
+    },
+    "agent_identity": {
+      "type": "object",
+      "required": ["pid", "process_name"],
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "description": "Process ID at time of observation."
+        },
+        "process_name": {
+          "type": "string",
+          "description": "Name of the observed process."
+        },
+        "parent_pid": {
+          "type": "integer",
+          "description": "PID of the parent process."
+        },
+        "parent_process_name": {
+          "type": "string",
+          "description": "Name of the parent process."
+        },
+        "ancestry_chain": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Full process ancestry from init to observed process."
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["type", "outcome"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Event type.",
+          "examples": [
+            "network_connect_attempt",
+            "network_connect_blocked",
+            "process_exec",
+            "file_access"
+          ]
+        },
+        "syscall": {
+          "type": "string",
+          "description": "Specific syscall observed.",
+          "examples": ["connect", "execve", "open"]
+        },
+        "destination_ip": {
+          "type": "string",
+          "description": "Destination IP address for network events."
+        },
+        "destination_port": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "Destination port for network events."
+        },
+        "destination_hostname": {
+          "type": "string",
+          "description": "Resolved hostname if available at observation time."
+        },
+        "outcome": {
+          "type": "string",
+          "enum": ["allowed", "blocked"],
+          "description": "Whether the event was allowed or blocked."
+        },
+        "latency_ns": {
+          "type": "integer",
+          "description": "Time in nanoseconds from syscall entry to receipt generation."
+        }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "required": ["prev_receipt_id", "prev_receipt_hash", "chain_hash"],
+      "properties": {
+        "prev_receipt_id": {
+          "type": "string",
+          "description": "receipt_id of the preceding receipt. GENESIS for the first receipt."
+        },
+        "prev_receipt_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the preceding receipt JSON, hex-encoded. 64 zeros for genesis."
+        },
+        "chain_hash": {
+          "type": "string",
+          "description": "SHA-256 of concatenation of prev_receipt_id and current attestation.signature, hex-encoded."
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "required": ["simulation", "method", "signature"],
+      "properties": {
+        "simulation": {
+          "type": "boolean",
+          "description": "REQUIRED. false if hardware-signed. true if software-signed. May not be omitted."
+        },
+        "method": {
+          "type": "string",
+          "description": "Signing method.",
+          "examples": [
+            "TPM2-ECDSA-P256-PCR-SEALED",
+            "HMAC-SHA256-SOFTWARE",
+            "ECDSA-P256-SOFTWARE"
+          ]
+        },
+        "signature": {
+          "type": "string",
+          "description": "Cryptographic signature over the receipt payload, hex-encoded."
+        },
+        "public_key_hint": {
+          "type": "string",
+          "description": "Short identifier for the signing key."
+        },
+        "tpm_manufacturer": {
+          "type": "string",
+          "description": "TPM manufacturer if hardware-signed.",
+          "examples": ["Infineon", "STMicroelectronics", "Nuvoton"]
+        },
+        "pcr_sealed": {
+          "type": "boolean",
+          "description": "true if signing key is PCR-sealed to boot state."
+        }
+      }
+    },
+    "payload_hash": {
+      "type": "string",
+      "description": "SHA-256 of canonical JSON of all fields except attestation.signature and chain.chain_hash, hex-encoded."
+    }
+  },
+  "additionalProperties": true
+}

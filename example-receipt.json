@@ -1,0 +1,41 @@
+{
+  "receipt_id": "7f3a2c1e-4b8d-4e9f-a012-3c4d5e6f7a8b",
+  "schema_version": "0.1.0",
+  "timestamp_utc": "2026-04-13T14:22:01.847Z",
+  "sequence_id": 1107820,
+  "observation_layer": "kernel_syscall",
+  "agent_identity": {
+    "pid": 8842,
+    "process_name": "python3",
+    "parent_pid": 8801,
+    "parent_process_name": "ai_agent_runtime",
+    "ancestry_chain": [
+      "systemd",
+      "ai_agent_runtime",
+      "python3"
+    ]
+  },
+  "event": {
+    "type": "network_connect_attempt",
+    "syscall": "connect",
+    "destination_ip": "104.18.32.0",
+    "destination_port": 443,
+    "destination_hostname": "api.example.com",
+    "outcome": "allowed",
+    "latency_ns": 487
+  },
+  "chain": {
+    "prev_receipt_id": "6e2b1d0f-3a7c-4d8e-b901-2b3c4d5e6f7a",
+    "prev_receipt_hash": "a7f8b9c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
+    "chain_hash": "3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4"
+  },
+  "attestation": {
+    "simulation": false,
+    "method": "TPM2-ECDSA-P256-PCR-SEALED",
+    "signature": "3046022100a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2022100c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+    "public_key_hint": "0c39467e",
+    "tpm_manufacturer": "Infineon",
+    "pcr_sealed": true
+  },
+  "payload_hash": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"
+}
