@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/asars-standard/spec/profiles/telecom-sla/v0.1-draft.json",
   "title": "ASARS Telecom-SLA Profile v0.1-draft",
-  "description": "ASARS payload extension for 5G SLA, C-V2X, and URLLC-oriented edge measurement. Draft — co-developed with Attesta Edgeflow (Curiosity Lab and field experiments). Validate TEID semantics and KPI definitions with live RAN/core data before production.",
+  "description": "ASARS payload extension for 5G SLA, C-V2X, and URLLC-oriented edge measurement. Draft — developed with input from 5G edge practitioners and lab or field trial data. Validate TEID semantics and KPI definitions with live RAN/core data before production.",
   "status": "DRAFT — not for production use",
   "allOf": [
     { "$ref": "../../schema.json" },
@@ -59,7 +59,7 @@
             },
             "correlated_receipt_id": {
               "type": "string",
-              "description": "Identifier linking to a correlated AI or control-plane ASARS receipt (commonly a UUID shared with Attesta Edgeflow)."
+              "description": "Identifier linking to a correlated AI or control-plane ASARS receipt (for example a UUID shared across correlating observability systems)."
             },
             "outcome": {
               "type": "string",
@@ -71,5 +71,5 @@
       }
     }
   ],
-  "notes": "Co-development: Attesta Edgeflow. Confirm field names against GSMA NG.116 attribute IDs and 3GPP KPI definitions (e.g. TS 28.552). correlated_receipt_id bridges network and autonomy receipt chains when both are attested."
+  "notes": "Confirm field names against GSMA NG.116 attribute IDs and 3GPP KPI definitions (e.g. TS 28.552). correlated_receipt_id bridges network and autonomy receipt chains when both are attested."
 }

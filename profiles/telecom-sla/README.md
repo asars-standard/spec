@@ -1,6 +1,6 @@
 # Telecom-SLA Profile (v0.1-draft)
 
-**Status:** Draft — not for production. Co-developed with **Attesta Edgeflow** for experiment-driven receipts (e.g. Curiosity Lab). Fields must be validated against live RAN/core telemetry before publication.
+**Status:** Draft — not for production. This profile is in active development in collaboration with 5G edge infrastructure practitioners. Design partner review is in progress. Contact engineering@residualdelta.com to participate in profile development. Fields must be validated against live RAN/core telemetry before publication.
 
 ## Domain
 
@@ -28,6 +28,6 @@ GSMA BCE 2.0, GSMA NG.116, 3GPP TS 28.552 and related 5G management / KPI specif
 
 ## Review gate
 
-Minimum: working session with **Attesta Edgeflow** confirming TEID (or equivalent), NEST type, NG.116 attribute identifiers, and measurement semantics match production experiment wiring.
+Minimum: collaborative technical review with practitioners building 5G edge SLA verification systems, confirming TEID (or equivalent), NEST type, NG.116 attribute identifiers, and measurement semantics match production experiment wiring.
 
 Schema: [v0.1-draft.json](v0.1-draft.json).

@@ -35,6 +35,8 @@ ASARS v0.1 requires `event.outcome` to be **`allowed`** or **`blocked`** only. P
 | [Industrial-ROS](industrial-ros/README.md) | Factory robotics, ROS | Draft |
 | [Kinetic-UAS](kinetic-uas/README.md) | Unmanned / autonomous kinetic platforms | Draft |
 
+The Telecom-SLA profile is being developed with input from 5G SLA verification practitioners working in C-V2X and URLLC environments.
+
 ## Contributing
 
 Open a GitHub Issue for new domains, then propose schema under `profiles/`. The **attestation envelope is not modifiable** in a profile; payload and documented context objects are. See [CONTRIBUTING.md](../CONTRIBUTING.md).
