@@ -16,18 +16,30 @@ ASARS defines a receipt format. It does not specify implementation. Any system t
 
 Use GitHub Issues to report ambiguities, errors, or gaps in the specification.
 
-### Proposing Extensions
+### Proposing domain extensions (profiles)
 
-ASARS v0.1 defines the core receipt format. Extensions for specific deployment contexts — 5G SLA verification, multi-agent session framing, enterprise enforcement events, GRC platform ingestion formats — will be considered for v0.2.
+Most domain specialization should ship as an **ASARS profile** — a JSON Schema under `profiles/` that documents `event` payload conventions while inheriting the core attestation envelope via `$ref` to [schema.json](schema.json). See [profiles/README.md](profiles/README.md).
 
-To propose an extension:
+To propose a profile:
 
-1. Open a GitHub Issue describing the use case
-2. Explain what fields the extension adds and why they are necessary
-3. Provide at least one example receipt using the proposed extension fields
-4. Reference any existing standards or specifications the extension aligns with
+1. Open a GitHub Issue describing the use case and deployment context
+2. Explain what `event` fields (or documented optional top-level fields) the profile adds and why they are necessary
+3. Provide at least one example receipt that conforms to the core schema and illustrates the profile payload
+4. Reference any existing standards or specifications the profile aligns with
 
-Extensions must not conflict with core v0.1 fields. The `additionalProperties: true` setting in the JSON schema intentionally allows extensions.
+Profiles must not redefine or contradict the core attestation fields (`chain`, `attestation`, `payload_hash`, simulation disclosure, and so on).
+
+### Proposing core (envelope) changes
+
+Changes that alter the universal attestation envelope — for example new required top-level fields — are **core specification** changes and follow semantic versioning (future v0.2+), not the profile path.
+
+To propose a core change:
+
+1. Open a GitHub Issue with the motivating production or regulatory requirement
+2. Explain why a profile cannot satisfy the need
+3. Provide migration and verification considerations
+
+Extensions must not conflict with existing core semantics. The `additionalProperties: true` setting in the JSON schema intentionally allows experimental payload fields while profiles document the intended shapes.
 
 ### Compatible Implementations
 

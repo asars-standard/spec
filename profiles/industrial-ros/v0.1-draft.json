@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/asars-standard/spec/profiles/industrial-ros/v0.1-draft.json",
+  "title": "ASARS Industrial-ROS Profile v0.1-draft",
+  "description": "ASARS payload extension for factory robotics and ROS-based industrial systems. Draft status — seeking review from robotics integration and functional-safety practitioners.",
+  "status": "DRAFT — not for production use",
+  "allOf": [
+    {
+      "$ref": "../../schema.json"
+    },
+    {
+      "properties": {
+        "event": {
+          "type": "object",
+          "required": ["type", "outcome"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Industrial / ROS event classification.",
+              "examples": [
+                "ros_topic_publish_attempt",
+                "ros_service_call_attempt",
+                "safety_interlock_check",
+                "collaborative_robot_zone_event",
+                "plc_bridge_command_attempt"
+              ]
+            },
+            "robot_cell_id": {
+              "type": "string",
+              "description": "Identifier for the robot cell or workcell."
+            },
+            "ros_node_name": {
+              "type": "string",
+              "description": "ROS node name at observation time, if applicable."
+            },
+            "topic_or_service": {
+              "type": "string",
+              "description": "Fully qualified topic or service name, if applicable."
+            },
+            "frame_id": {
+              "type": "string",
+              "description": "TF or message frame_id when spatial context applies."
+            },
+            "safety_plc_signature_hash": {
+              "type": "string",
+              "description": "Hash of the active safety PLC program or safety configuration snapshot, if applicable."
+            },
+            "outcome": {
+              "type": "string",
+              "enum": ["allowed", "blocked"],
+              "description": "Whether the observed action was allowed or blocked."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "notes": "Draft profile. The core ASARS attestation envelope is unchanged. This schema sketches common industrial-ROS observability fields; field names and enums are expected to co-evolve with implementers."
+}

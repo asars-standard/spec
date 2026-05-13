@@ -7,6 +7,14 @@ ASARS follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- **Profiles** — `profiles/` directory: domain-specific `event` payload schemas (Enterprise Cloud v0.1 published; Kinetic-UAS, Industrial-ROS, and Telecom-SLA drafts). Core attestation envelope unchanged.
+
+---
+
 ## [0.1.0] — 2026-05-11
 
 ### Initial Release

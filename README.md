@@ -112,9 +112,15 @@ See [example-receipt.json](example-receipt.json) for a sample compliant receipt.
 
 ---
 
+## Profiles
+
+ASARS keeps one core attestation envelope; **profiles** document domain-specific `event` payloads (OpenAPI- and FHIR-style specialization, not separate standard versions). See [profiles/README.md](profiles/README.md).
+
+---
+
 ## Contributing
 
-ASARS is designed to be extensible. Compatible receipt format extensions for specific use cases — 5G SLA verification, multi-agent session framing, enterprise enforcement events — are welcome as v0.2 proposals.
+ASARS is designed to be extensible. New domains should prefer a **profile** under `profiles/`; cross-cutting changes to the attestation envelope follow semantic versioning and the contribution process.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution process.
 
@@ -122,10 +128,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution process.
 
 ## Versioning
 
-ASARS follows semantic versioning.
+ASARS follows semantic versioning for the **core** specification.
 
 - **v0.1.x** — core receipt format, chain linking, simulation disclosure, independent verification
-- **v0.2** — extensions for specific deployment contexts based on empirical production data
+- **Profiles** — domain-specific `event` payloads under `profiles/` evolve on their own lifecycle; a new profile does not constitute a new ASARS version
+- **v0.2+** — reserved for backward-incompatible or envelope-level changes to the core spec when justified by production experience
 
 ---
 

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/asars-standard/spec/profiles/telecom-sla/v0.1-draft.json",
+  "title": "ASARS Telecom-SLA Profile v0.1-draft",
+  "description": "ASARS payload extension for 5G SLA verification, C-V2X, and URLLC-oriented edge measurements. Draft profile co-developed with Attesta Edgeflow for experiment-driven receipts (including Curiosity Lab deployments). Not for production until reviewed against live RAN and core network telemetry.",
+  "status": "DRAFT — not for production use",
+  "allOf": [
+    {
+      "$ref": "../../schema.json"
+    },
+    {
+      "properties": {
+        "event": {
+          "type": "object",
+          "required": ["type", "outcome"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Telecom / edge SLA event classification.",
+              "examples": [
+                "sla_kpi_window",
+                "urllc_latency_sample",
+                "c_v2x_session_event",
+                "ran_handover_event",
+                "slice_qos_evaluation"
+              ]
+            },
+            "experiment_id": {
+              "type": "string",
+              "description": "Identifier linking this receipt to a lab or field experiment (e.g. Curiosity_lab run)."
+            },
+            "network_slice_id": {
+              "type": "string",
+              "description": "Logical network slice or tenant slice identifier, if applicable."
+            },
+            "gnb_id": {
+              "type": "string",
+              "description": "gNodeB or edge site identifier, if applicable."
+            },
+            "latency_ms": {
+              "type": "number",
+              "description": "Observed one-way or round-trip latency in milliseconds, semantics defined by the observer."
+            },
+            "jitter_ms": {
+              "type": "number",
+              "description": "Observed jitter in milliseconds, semantics defined by the observer."
+            },
+            "packet_or_frame_loss_ppm": {
+              "type": "number",
+              "description": "Loss rate in parts per million (or equivalent), semantics defined by the observer."
+            },
+            "sla_threshold_breach": {
+              "type": "boolean",
+              "description": "Whether the observation crossed a configured SLA threshold at receipt time."
+            },
+            "outcome": {
+              "type": "string",
+              "enum": ["allowed", "blocked"],
+              "description": "Whether the underlying action or datapath state was allowed or blocked by policy or enforcement."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "notes": "Co-development target: Attesta Edgeflow architecture and empirical data from Curiosity Lab. Replace placeholder KPI fields with types and units agreed with RAN/core subject-matter experts before marking a non-draft revision."
+}

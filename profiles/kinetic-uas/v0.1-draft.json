@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/asars-standard/spec/profiles/kinetic-uas/v0.1-draft.json",
+  "title": "ASARS Kinetic-UAS Profile v0.1-draft",
+  "description": "ASARS payload extension for unmanned aerial systems and autonomous kinetic platforms. Draft status — seeking review from autonomous systems practitioners.",
+  "status": "DRAFT — not for production use",
+  "allOf": [
+    {
+      "$ref": "../../schema.json"
+    },
+    {
+      "properties": {
+        "event": {
+          "type": "object",
+          "required": ["type", "outcome"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Kinetic / UAS event classification.",
+              "examples": [
+                "actuator_command_attempt",
+                "actuator_command_blocked",
+                "geofence_boundary_check",
+                "roe_policy_evaluation",
+                "waypoint_navigation_event"
+              ]
+            },
+            "platform_id": {
+              "type": "string",
+              "description": "Unique identifier for the autonomous platform."
+            },
+            "flight_controller": {
+              "type": "string",
+              "description": "Flight control system identifier."
+            },
+            "gps_coordinates": {
+              "type": "object",
+              "description": "Observed position at event time, if available.",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" },
+                "altitude_meters": { "type": "number" }
+              }
+            },
+            "actuator_target": {
+              "type": "string",
+              "description": "Target actuator system identifier."
+            },
+            "roe_policy_hash": {
+              "type": "string",
+              "description": "SHA-256 hash of the Rules of Engagement policy document active at event time."
+            },
+            "outcome": {
+              "type": "string",
+              "enum": ["allowed", "blocked"],
+              "description": "Whether the evaluated action was allowed or blocked."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "notes": "This profile is in draft status. The ASARS attestation envelope defined in the core schema applies without modification. This profile defines only the event payload extension for kinetic autonomous systems. Seeking review from autonomous systems engineers and defense compliance practitioners."
+}
