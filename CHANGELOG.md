@@ -13,6 +13,10 @@ ASARS follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **Profiles** — `profiles/` directory: domain-specific `event` payload schemas (Enterprise Cloud v0.1 published; Kinetic-UAS, Industrial-ROS, and Telecom-SLA drafts). Core attestation envelope unchanged.
 
+### Changed
+
+- **Profiles** — Per-profile READMEs (liability question, demarcation point, frameworks, review gates). Draft schemas add `telecom_context`, `industrial_context`, `kinetic_context`; domain enums for `event.type` where helpful; parallel fields `sla_result` / `command_disposition` while retaining core `event.outcome` (`allowed` | `blocked`).
+
 ---
 
 ## [0.1.0] — 2026-05-11

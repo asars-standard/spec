@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/asars-standard/spec/profiles/enterprise-cloud/v0.1.json",
   "title": "ASARS Enterprise Cloud Profile v0.1",
-  "description": "Domain payload conventions for cloud AI agents, CI/CD pipelines, and API egress monitoring. Extends ASARS v0.1 core without modifying the attestation envelope. Aligns with the recommended event types in the core schema.",
+  "description": "Published Enterprise Cloud profile: network demarcation (connect syscall) and agent identity for cloud AI and CI/CD. See README.md for liability and regulatory framing. Extends ASARS v0.1 core without modifying the attestation envelope.",
   "allOf": [
     {
       "$ref": "../../schema.json"

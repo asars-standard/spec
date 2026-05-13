@@ -2,66 +2,74 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/asars-standard/spec/profiles/telecom-sla/v0.1-draft.json",
   "title": "ASARS Telecom-SLA Profile v0.1-draft",
-  "description": "ASARS payload extension for 5G SLA verification, C-V2X, and URLLC-oriented edge measurements. Draft profile co-developed with Attesta Edgeflow for experiment-driven receipts (including Curiosity Lab deployments). Not for production until reviewed against live RAN and core network telemetry.",
+  "description": "ASARS payload extension for 5G SLA, C-V2X, and URLLC-oriented edge measurement. Draft — co-developed with Attesta Edgeflow (Curiosity Lab and field experiments). Validate TEID semantics and KPI definitions with live RAN/core data before production.",
   "status": "DRAFT — not for production use",
   "allOf": [
-    {
-      "$ref": "../../schema.json"
-    },
+    { "$ref": "../../schema.json" },
     {
       "properties": {
+        "telecom_context": {
+          "type": "object",
+          "description": "5G / edge networking context at the measurement demarcation point (e.g. UPF user-plane treatment).",
+          "properties": {
+            "teid": {
+              "type": "string",
+              "description": "Tunnel Endpoint ID or deployment-equivalent session identifier (3GPP-aligned where applicable)."
+            },
+            "gsma_nest_type": {
+              "type": "string",
+              "description": "GSMA NG.116 NEST / slice service category.",
+              "enum": ["eMBB", "URLLC", "V2X", "mMTC"]
+            },
+            "gsma_ng116_sla_attribute": {
+              "type": "string",
+              "description": "Specific NG.116 GST / SLA attribute identifier being measured."
+            },
+            "latency_measured_ms": {
+              "type": "number",
+              "description": "Observed latency in milliseconds (one-way vs RTT defined by observer)."
+            },
+            "sla_threshold_ms": {
+              "type": "number",
+              "description": "Committed or evaluated SLA latency threshold in milliseconds."
+            },
+            "packet_loss_rate": {
+              "type": "number",
+              "description": "Packet or frame loss rate (0–1 fraction or PPM per observer convention — document in implementation)."
+            },
+            "jitter_ms": {
+              "type": "number",
+              "description": "Observed jitter in milliseconds."
+            }
+          }
+        },
         "event": {
           "type": "object",
           "required": ["type", "outcome"],
           "properties": {
             "type": {
               "type": "string",
-              "description": "Telecom / edge SLA event classification.",
-              "examples": [
-                "sla_kpi_window",
-                "urllc_latency_sample",
-                "c_v2x_session_event",
-                "ran_handover_event",
-                "slice_qos_evaluation"
-              ]
+              "description": "Telecom SLA event classification.",
+              "enum": ["sla_measurement", "sla_breach", "sla_recovery"]
             },
-            "experiment_id": {
+            "sla_result": {
               "type": "string",
-              "description": "Identifier linking this receipt to a lab or field experiment (e.g. Curiosity_lab run)."
+              "description": "Domain SLA result. Map to core outcome: sla_met → allowed; sla_breach → blocked (unless local policy inverts labels).",
+              "enum": ["sla_met", "sla_breach"]
             },
-            "network_slice_id": {
+            "correlated_receipt_id": {
               "type": "string",
-              "description": "Logical network slice or tenant slice identifier, if applicable."
-            },
-            "gnb_id": {
-              "type": "string",
-              "description": "gNodeB or edge site identifier, if applicable."
-            },
-            "latency_ms": {
-              "type": "number",
-              "description": "Observed one-way or round-trip latency in milliseconds, semantics defined by the observer."
-            },
-            "jitter_ms": {
-              "type": "number",
-              "description": "Observed jitter in milliseconds, semantics defined by the observer."
-            },
-            "packet_or_frame_loss_ppm": {
-              "type": "number",
-              "description": "Loss rate in parts per million (or equivalent), semantics defined by the observer."
-            },
-            "sla_threshold_breach": {
-              "type": "boolean",
-              "description": "Whether the observation crossed a configured SLA threshold at receipt time."
+              "description": "Identifier linking to a correlated AI or control-plane ASARS receipt (commonly a UUID shared with Attesta Edgeflow)."
             },
             "outcome": {
               "type": "string",
               "enum": ["allowed", "blocked"],
-              "description": "Whether the underlying action or datapath state was allowed or blocked by policy or enforcement."
+              "description": "Core ASARS outcome: allowed if SLA met / path acceptable; blocked if breach or policy block."
             }
           }
         }
       }
     }
   ],
-  "notes": "Co-development target: Attesta Edgeflow architecture and empirical data from Curiosity Lab. Replace placeholder KPI fields with types and units agreed with RAN/core subject-matter experts before marking a non-draft revision."
+  "notes": "Co-development: Attesta Edgeflow. Confirm field names against GSMA NG.116 attribute IDs and 3GPP KPI definitions (e.g. TS 28.552). correlated_receipt_id bridges network and autonomy receipt chains when both are attested."
 }

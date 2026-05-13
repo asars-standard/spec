@@ -2,58 +2,76 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/asars-standard/spec/profiles/industrial-ros/v0.1-draft.json",
   "title": "ASARS Industrial-ROS Profile v0.1-draft",
-  "description": "ASARS payload extension for factory robotics and ROS-based industrial systems. Draft status — seeking review from robotics integration and functional-safety practitioners.",
+  "description": "ASARS payload extension for factory robotics and ROS-based industrial systems. Draft — requires review from ROS + functional-safety practitioners before publication.",
   "status": "DRAFT — not for production use",
   "allOf": [
-    {
-      "$ref": "../../schema.json"
-    },
+    { "$ref": "../../schema.json" },
     {
       "properties": {
+        "industrial_context": {
+          "type": "object",
+          "description": "Industrial cell and safety context at the ROS command demarcation point.",
+          "properties": {
+            "ros_node_name": { "type": "string" },
+            "ros_namespace": { "type": "string" },
+            "ros_topic": {
+              "type": "string",
+              "description": "Fully qualified topic identifying actuator or subsystem."
+            },
+            "robot_id": { "type": "string" },
+            "facility_id": { "type": "string" },
+            "iec_61508_sil_level": {
+              "type": "string",
+              "enum": ["SIL1", "SIL2", "SIL3", "SIL4"]
+            }
+          }
+        },
         "event": {
           "type": "object",
           "required": ["type", "outcome"],
           "properties": {
             "type": {
               "type": "string",
-              "description": "Industrial / ROS event classification.",
-              "examples": [
-                "ros_topic_publish_attempt",
-                "ros_service_call_attempt",
-                "safety_interlock_check",
-                "collaborative_robot_zone_event",
-                "plc_bridge_command_attempt"
+              "description": "Industrial / safety event classification.",
+              "enum": [
+                "actuator_command",
+                "safety_stop",
+                "zone_violation",
+                "human_proximity_detection"
               ]
             },
-            "robot_cell_id": {
+            "command_type": {
               "type": "string",
-              "description": "Identifier for the robot cell or workcell."
+              "description": "Semantic command class (e.g. move, stop, engage, release) — extend per deployment dictionary.",
+              "examples": ["move", "stop", "engage", "release"]
             },
-            "ros_node_name": {
+            "safety_monitor_outcome": {
               "type": "string",
-              "description": "ROS node name at observation time, if applicable."
+              "enum": ["approved", "blocked", "escalated"],
+              "description": "Safety monitor or interlock decision."
             },
-            "topic_or_service": {
-              "type": "string",
-              "description": "Fully qualified topic or service name, if applicable."
+            "hitl_required": {
+              "type": "boolean",
+              "description": "Whether human-in-the-loop was required for this class of command."
             },
-            "frame_id": {
+            "hitl_authorized_by": {
               "type": "string",
-              "description": "TF or message frame_id when spatial context applies."
+              "description": "Operator or role identifier when HITL authorized."
             },
-            "safety_plc_signature_hash": {
+            "command_disposition": {
               "type": "string",
-              "description": "Hash of the active safety PLC program or safety configuration snapshot, if applicable."
+              "description": "Domain result of the command path. Map to core outcome: executed→allowed; blocked→blocked; escalated→blocked (pending) or allowed (cleared) per policy.",
+              "enum": ["executed", "blocked", "escalated"]
             },
             "outcome": {
               "type": "string",
               "enum": ["allowed", "blocked"],
-              "description": "Whether the observed action was allowed or blocked."
+              "description": "Core ASARS policy result at observation time."
             }
           }
         }
       }
     }
   ],
-  "notes": "Draft profile. The core ASARS attestation envelope is unchanged. This schema sketches common industrial-ROS observability fields; field names and enums are expected to co-evolve with implementers."
+  "notes": "Validate joint state / velocity payloads and PLC hash fields with integrators before freezing. Acknowledge reviewer(s) in README when promoted from draft."
 }
