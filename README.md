@@ -108,7 +108,7 @@ See [schema.json](schema.json) for the machine-readable JSON Schema.
 
 ## Example Receipt
 
-See [example-receipt.json](example-receipt.json) for a sample compliant receipt.
+See the **Enterprise Cloud** profile example [profiles/enterprise-cloud/examples/v0.1-example.json](profiles/enterprise-cloud/examples/v0.1-example.json) for a sample compliant receipt you can run through `openssl` with your key and signature files.
 
 ---
 

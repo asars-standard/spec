@@ -9,13 +9,17 @@ ASARS follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-05-13
+
 ### Added
 
-- **Profiles** — `profiles/` directory: domain-specific `event` payload schemas (Enterprise Cloud v0.1 published; Kinetic-UAS, Industrial-ROS, and Telecom-SLA drafts). Core attestation envelope unchanged.
+- **Profiles** — `profiles/` directory: domain-specific `event` payloads (Enterprise Cloud v0.1 published; Kinetic-UAS, Industrial-ROS, Telecom-SLA drafts). Core attestation envelope unchanged.
+- **Enterprise Cloud example** — [profiles/enterprise-cloud/examples/v0.1-example.json](profiles/enterprise-cloud/examples/v0.1-example.json) for practical verification workflows.
 
 ### Changed
 
-- **Profiles** — Per-profile READMEs (liability question, demarcation point, frameworks, review gates). Draft schemas add `telecom_context`, `industrial_context`, `kinetic_context`; domain enums for `event.type` where helpful; parallel fields `sla_result` / `command_disposition` while retaining core `event.outcome` (`allowed` | `blocked`).
+- **Profiles** — Per-profile READMEs (liability question, demarcation point, frameworks, review gates). Draft schemas include `telecom_context`, `industrial_context`, `kinetic_context`; domain enums for `event.type` where helpful; parallel fields `sla_result` / `command_disposition` while retaining core `event.outcome` (`allowed` | `blocked`).
+- **Discoverability** — `schema.json` description references `profiles/` for domain payloads. Primary sample receipt moved from repository root to the Enterprise Cloud profile examples path; root README updated.
 
 ---
 

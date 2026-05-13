@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/asars-standard/spec/schema.json",
   "title": "ASARS v0.1",
-  "description": "Autonomous Systems Audit Receipt Standard version 0.1.0",
+  "description": "Autonomous Systems Audit Receipt Standard version 0.1.0. Domain-specific event payloads are defined by ASARS Profiles in the profiles/ directory of this repository.",
   "version": "0.1.0",
   "type": "object",
   "required": [

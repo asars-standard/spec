@@ -23,6 +23,8 @@ The **network syscall** (or equivalent kernel-visible attempt) — the moment th
 
 Machine schema: [v0.1.json](v0.1.json) (references core [schema.json](../../schema.json)).
 
+**Example receipt (OpenSSL verification):** [examples/v0.1-example.json](examples/v0.1-example.json) — network connect attempt with `kernel_syscall` observation; conforms to core ASARS v0.1 and this profile.
+
 ## Governing frameworks (illustrative)
 
 EU AI Act Article 12 (tamper-evident logging), NIST SP 800-53 AU family, CMMC 2.0 AU controls, SOC 2 Type II audit evidence for access monitoring.
