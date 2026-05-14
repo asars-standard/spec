@@ -87,6 +87,12 @@ Any party can verify the hardware root of trust using one OpenSSL command agains
 
 ---
 
+## Known Implementation Variances
+
+Note on Reference Implementations: Early production deployments of the Residual Delta infrastructure (using schema_version: "residual-delta-1.0") emit the method string "HMAC-SHA256-SIM". This is a legacy synonym for "HMAC-SHA256-SOFTWARE". Furthermore, these early implementations may omit the chain_hash field. This is a known variance; the core hardware/software attestation disclosures (simulation: true/false) remain strictly enforced.
+
+---
+
 ## Regulatory Alignment
 
 ASARS v0.1 is designed to satisfy the tamper-evident audit trail requirements of:
