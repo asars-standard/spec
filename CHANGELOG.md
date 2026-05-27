@@ -9,6 +9,11 @@ ASARS follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **ROADMAP.md** — v0.2 plan for ASARS Summary Profile and ASARS Full Profile; documents that v0.1 Full Profile semantics are unchanged.
+- **README** — Public API summary view note under Known Implementation Variances; v0.2 tiered profile roadmap in Versioning.
+
 ## [0.1.1] — 2026-05-13
 
 ### Added
