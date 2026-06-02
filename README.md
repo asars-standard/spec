@@ -79,7 +79,8 @@ Residual Delta operates the reference implementation of ASARS v0.1.
 - **Hardware:** Lenovo bare metal with Infineon SLB9670 discrete TPM 2.0
 - **Signing algorithm:** ECDSA P-256, PCR-sealed
 - **Live since:** April 13, 2026
-- **Receipts generated:** 1,100,000+ hardware-attested receipts in continuous operation
+- **Receipts generated:** 5,000,000+ receipts in continuous operation (>99.999% hardware-attested; 58 software-signed receipts from early development, explicitly disclosed per `simulation` field requirement)
+- **Second node:** Rocky Linux 9 (RHEL/FIPS 140-3), full enforcement mode, independently self-certified June 2026 — 25/25 checks PASS
 
 Live verification available at: [residualdelta.com/verification-portal](https://residualdelta.com/verification-portal)
 
@@ -104,6 +105,7 @@ ASARS v0.1 is designed to satisfy the tamper-evident audit trail requirements of
 - NIST SP 800-53 AU-10 — non-repudiation
 - CMMC 2.0 AU.L2-3.3.1 — create and retain system audit logs
 - ISO 27001:2022 A.8.15 — logging
+- FedRAMP Moderate — AU-2, AU-9, AU-10, AU-12 (audit generation, protection, non-repudiation, content of audit records)
 
 ---
 
