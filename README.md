@@ -1,6 +1,6 @@
 # ASARS — Autonomous Systems Audit Receipt Standard
 
-**Version:** 0.1.0  
+**Version:** 0.2.0  
 **Status:** Draft — Public Comment Welcome  
 **License:** Apache 2.0  
 **Maintained by:** [Residual Delta](https://residualdelta.com)
@@ -77,10 +77,10 @@ No proprietary software. No vendor infrastructure. No vendor trust required.
 Residual Delta operates the reference implementation of ASARS v0.1.
 
 - **Hardware:** Lenovo bare metal with Infineon SLB9670 discrete TPM 2.0
+- **Second node:** Rocky Linux 9 (RHEL/FIPS 140-3), full enforcement mode, independently self-certified June 2026 — 25/25 checks PASS
 - **Signing algorithm:** ECDSA P-256, PCR-sealed
 - **Live since:** April 13, 2026
 - **Receipts generated:** 5,000,000+ receipts in continuous operation (>99.999% hardware-attested; 58 software-signed receipts from early development, explicitly disclosed per `simulation` field requirement)
-- **Second node:** Rocky Linux 9 (RHEL/FIPS 140-3), full enforcement mode, independently self-certified June 2026 — 25/25 checks PASS
 
 Live verification available at: [residualdelta.com/verification-portal](https://residualdelta.com/verification-portal)
 
@@ -101,11 +101,30 @@ Note on Reference Implementations: Early production deployments of the Residual 
 ASARS v0.1 is designed to satisfy the tamper-evident audit trail requirements of:
 
 - EU AI Act Article 12 — tamper-evident logging for high-risk AI systems
-- NIST SP 800-53 AU-9 — protection of audit information
+- NIST SP 800-53 AU-2  — event logging
+- NIST SP 800-53 AU-9  — protection of audit information
 - NIST SP 800-53 AU-10 — non-repudiation
+- NIST SP 800-53 AU-12 — audit record generation
 - CMMC 2.0 AU.L2-3.3.1 — create and retain system audit logs
 - ISO 27001:2022 A.8.15 — logging
-- FedRAMP Moderate — AU-2, AU-9, AU-10, AU-12 (audit generation, protection, non-repudiation, content of audit records)
+
+---
+
+## Receipt Content Fields
+
+ASARS defines the chain envelope. Implementations MAY include additional fields inside `receipt_json`. The following field is RECOMMENDED in v0.2.0:
+
+**category** (string, RECOMMENDED)  
+Classifies the event that generated the receipt. Enables audience-specific filtering without breaking chain integrity. The hash covers the full `receipt_json` including this field — chain integrity is unaffected.
+
+Defined values:
+- `agent_behavior`     — action taken by a governed autonomous agent
+- `compliance_event`   — audit-relevant system event (login, privilege, config change)
+- `enforcement_action` — policy decision: ALLOWED, BLOCKED, or SHADOW_BLOCKED
+- `network_flow`       — packet-level allow/drop decision (XDP/NIC enforcement)
+- `system_baseline`    — infrastructure process; lowest analytical priority
+
+Implementations that do not include this field remain fully valid under v0.2.0.
 
 ---
 
@@ -143,6 +162,19 @@ ASARS follows semantic versioning for the **core** specification.
 - **v0.1.x** — core receipt format, chain linking, simulation disclosure, independent verification (Full Profile semantics; see [ROADMAP.md](ROADMAP.md))
 - **Profiles** — domain-specific `event` payloads under `profiles/` evolve on their own lifecycle; a new profile does not constitute a new ASARS version
 - **v0.2 (planned)** — tiered receipt profiles: **Summary Profile** (attestation + event, spot verification) and **Full Profile** (v0.1 envelope with chain provenance). Does not weaken v0.1; makes the tiered access model a standards feature. See [ROADMAP.md](ROADMAP.md)
+
+---
+
+## Changelog
+
+**v0.2.0 (June 2026)**
+- Added RECOMMENDED `category` field for event classification and audience-specific filtering
+- Added NIST SP 800-53 AU-2 and AU-12 to regulatory alignment
+- Updated receipt count to 5M+ across two independently certified nodes
+- Added Rocky Linux 9 / FIPS 140-3 second node to reference implementation
+
+**v0.1.0 (April 2026)**
+- Initial release: core receipt chain, hardware attestation, simulation disclosure requirement, independent verification method
 
 ---
 
