@@ -92,7 +92,7 @@ Any party can verify the hardware root of trust using one OpenSSL command agains
 
 Note on Reference Implementations: Early production deployments of the Residual Delta infrastructure (using schema_version: "residual-delta-1.0") emit the method string "HMAC-SHA256-SIM". This is a legacy synonym for "HMAC-SHA256-SOFTWARE". Furthermore, these early implementations may omit the chain_hash field. This is a known variance; the core hardware/software attestation disclosures (simulation: true/false) remain strictly enforced.
 
-**Public API summary views:** The Residual Delta Tier 3 HTTP API returns an attestation-focused summary — sufficient for spot verification, not a v0.1-compliant full receipt. Full receipts with chain provenance are available via Tier 2 ledger access. ASARS v0.2 will formalize this as distinct Summary and Full receipt profiles. See [ROADMAP.md](ROADMAP.md).
+**Public API summary views:** The Residual Delta Tier 3 HTTP API returns an attestation-focused summary — sufficient for spot verification, not a v0.1-compliant full receipt. Full receipts with chain provenance are available via Tier 2 ledger access. ASARS v0.2.0 formalizes this as distinct Summary and Full receipt profiles. See [ROADMAP.md](ROADMAP.md).
 
 ---
 
@@ -161,7 +161,7 @@ ASARS follows semantic versioning for the **core** specification.
 
 - **v0.1.x** — core receipt format, chain linking, simulation disclosure, independent verification (Full Profile semantics; see [ROADMAP.md](ROADMAP.md))
 - **Profiles** — domain-specific `event` payloads under `profiles/` evolve on their own lifecycle; a new profile does not constitute a new ASARS version
-- **v0.2 (planned)** — tiered receipt profiles: **Summary Profile** (attestation + event, spot verification) and **Full Profile** (v0.1 envelope with chain provenance). Does not weaken v0.1; makes the tiered access model a standards feature. See [ROADMAP.md](ROADMAP.md)
+- **v0.2.0 (June 2026)** — tiered receipt profiles: **Summary Profile** (attestation + event, spot verification) and **Full Profile** (v0.1 envelope with chain provenance). Does not weaken v0.1; makes the tiered access model a standards feature. See [ROADMAP.md](ROADMAP.md)
 
 ---
 
