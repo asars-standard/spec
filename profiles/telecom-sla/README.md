@@ -1,6 +1,6 @@
 # Telecom-SLA Profile (v0.1-draft)
 
-**Status:** Draft — not for production. This profile is in active development in collaboration with 5G edge infrastructure practitioners. Design partner review is in progress. Contact engineering@residualdelta.com to participate in profile development. Fields must be validated against live RAN/core telemetry before publication.
+**Status:** Draft — not for production. This profile is in active development in collaboration with 5G edge infrastructure practitioners. Design partner review is in progress. Open a GitHub Issue to participate in profile development. Fields must be validated against live RAN/core telemetry before publication.
 
 ## Domain
 

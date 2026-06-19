@@ -3,7 +3,6 @@
 **Version:** 0.2.0  
 **Status:** Draft — Public Comment Welcome  
 **License:** Apache 2.0  
-**Maintained by:** [Residual Delta](https://residualdelta.com)
 
 ---
 
@@ -74,7 +73,7 @@ No proprietary software. No vendor infrastructure. No vendor trust required.
 
 ## Reference Implementation
 
-Residual Delta operates the reference implementation of ASARS v0.1.
+A reference implementation of ASARS v0.1 is in production.
 
 - **Hardware:** Lenovo bare metal with Infineon SLB9670 discrete TPM 2.0
 - **Second node:** Rocky Linux 9 (RHEL/FIPS 140-3), full enforcement mode, independently self-certified June 2026 — 25/25 checks PASS
@@ -82,17 +81,15 @@ Residual Delta operates the reference implementation of ASARS v0.1.
 - **Live since:** April 13, 2026
 - **Receipts generated:** 5,000,000+ receipts in continuous operation (>99.999% hardware-attested; 58 software-signed receipts from early development, explicitly disclosed per `simulation` field requirement)
 
-Live verification available at: [residualdelta.com/verification-portal](https://residualdelta.com/verification-portal)
-
-Any party can verify the hardware root of trust using one OpenSSL command against public files. No connection to Residual Delta infrastructure required.
+Any party can verify the hardware root of trust using one OpenSSL command against public files. No connection to any vendor infrastructure is required.
 
 ---
 
 ## Known Implementation Variances
 
-Note on Reference Implementations: Early production deployments of the Residual Delta infrastructure (using schema_version: "residual-delta-1.0") emit the method string "HMAC-SHA256-SIM". This is a legacy synonym for "HMAC-SHA256-SOFTWARE". Furthermore, these early implementations may omit the chain_hash field. This is a known variance; the core hardware/software attestation disclosures (simulation: true/false) remain strictly enforced.
+Note on Reference Implementations: Early production deployments (using schema_version: "legacy-implementation-1.0") emit the method string "HMAC-SHA256-SIM". This is a legacy synonym for "HMAC-SHA256-SOFTWARE". Furthermore, these early implementations may omit the chain_hash field. This is a known variance; the core hardware/software attestation disclosures (simulation: true/false) remain strictly enforced.
 
-**Public API summary views:** The Residual Delta Tier 3 HTTP API returns an attestation-focused summary — sufficient for spot verification, not a v0.1-compliant full receipt. Full receipts with chain provenance are available via Tier 2 ledger access. ASARS v0.2.0 formalizes this as distinct Summary and Full receipt profiles. See [ROADMAP.md](ROADMAP.md).
+**Public API summary views:** Some implementations expose a Tier 3 HTTP API that returns an attestation-focused summary — sufficient for spot verification, not a v0.1-compliant full receipt. Full receipts with chain provenance are available via Tier 2 ledger access. ASARS v0.2.0 formalizes this as distinct Summary and Full receipt profiles. See [ROADMAP.md](ROADMAP.md).
 
 ---
 

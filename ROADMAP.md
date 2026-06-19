@@ -8,7 +8,7 @@ This document describes planned evolution of the core specification. **ASARS v0.
 
 v0.1 defines a **complete compliant receipt**: attestation envelope, simulation disclosure, event payload, and **chain provenance** (`prev_receipt_id`, `prev_receipt_hash`, `chain_hash`). This is required for chain-continuity verification, legal hold, and controls such as NIST SP 800-53 AU-9.
 
-Implementations may expose a **summary view** over HTTP (attestation and event fields only) for spot verification. That view is not a v0.1-compliant receipt; it is an intentional, documented subset. See the [Residual Delta verification portal](https://residualdelta.com/verification-portal) Tier 3 documentation.
+Implementations may expose a **summary view** over HTTP (attestation and event fields only) for spot verification. That view is not a v0.1-compliant receipt; it is an intentional, documented subset. See implementation documentation for Tier 3 summary view behavior.
 
 ---
 

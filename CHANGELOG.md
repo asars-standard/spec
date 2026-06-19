@@ -42,7 +42,7 @@ First public release of the Autonomous Systems Audit Receipt Standard.
 - Regulatory alignment notes for EU AI Act Article 12, NIST 800-53, CMMC 2.0, ISO 27001
 
 **Reference implementation:**
-- Residual Delta production deployment
+- Production deployment of a reference implementation
 - 1,100,000+ hardware-attested receipts generated continuously since April 13, 2026
 - Infineon SLB9670 discrete TPM 2.0, ECDSA P-256, PCR-sealed
 
